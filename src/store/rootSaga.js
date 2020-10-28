@@ -1,3 +1,9 @@
+import { all } from 'redux-saga/effects';
+import authWatchers from './auth/saga';
+
 export default function* rootSaga() {
-  // console.log('Hello Sagas!');
+  yield all([
+    // for watcher
+    authWatchers(),
+  ]);
 }
