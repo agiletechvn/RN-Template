@@ -7,6 +7,8 @@ import Home from '@src/screens/Home';
 const Stack = createStackNavigator();
 
 const Routes = () => {
+  // const useTranslation();
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
