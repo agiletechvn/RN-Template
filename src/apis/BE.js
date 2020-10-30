@@ -61,3 +61,9 @@ export const privateRequest = async (request, url, configs) => {
   const token = await TokenManager.getToken();
   return request(url, injectBearer(token, configs));
 };
+
+const API_VERSION = '/v1.0';
+
+export const PATHS = {
+  SERVICE_NAME: `${API_VERSION}/service_path`,
+};
