@@ -8,5 +8,6 @@ module.exports = {
     'no-unused-vars': 'error',
     'no-console': 'error',
     'react/jsx-no-duplicate-props': 'error',
+    'comma-dangle': 'off',
   },
 };
