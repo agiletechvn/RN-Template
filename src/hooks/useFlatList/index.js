@@ -1,8 +1,16 @@
-import { useRef, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { useRequest } from '@umijs/hooks';
 
 const useFlatlist = (service, options) => {
-  const request = useRequest(service, options);
+  const request = useRequest(service, {
+    loadMore: true,
+    debounceInterval: 250,
+    isNoMore: (e) => {
+      return e?.list?.length >= e?.total;
+    },
+    ...options,
+  });
 
   const onEndReachedCalledDuringMomentum = useRef(true);
 
@@ -27,6 +35,7 @@ const useFlatlist = (service, options) => {
     onRefresh: request?.refresh,
     data: request?.data?.list,
     onEndReachedThreshold: 0.5,
+    ListFooterComponent: request?.loadingMore && <ActivityIndicator />,
   };
 
   return { ...request, flatListProps };

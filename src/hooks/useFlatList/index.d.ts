@@ -6,10 +6,15 @@ interface Options {
   loadingDelay: number;
 }
 
+interface DataResult {
+  list: Array<any>;
+  total: number;
+}
+
 interface Result {
   flatListProps;
   loading;
-  data;
+  data: DataResult;
   refresh;
   loadMore;
   loadingMore;
