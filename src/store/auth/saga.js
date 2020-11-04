@@ -1,6 +1,8 @@
 import { all, takeLatest } from 'redux-saga/effects';
 
-function* login({ type, payload }) {}
+function* login({ type, payload }) {
+  // service
+}
 
 function* logout({ type, payload }) {}
 
