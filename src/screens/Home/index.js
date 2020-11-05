@@ -46,16 +46,15 @@ const Home = () => {
 
   return (
     <Box flex={1} flexDirection="row" justify="center" shadowDepth={2}>
-      {/* <Box flex={1} flexDirection={'row'}>
-        {data?.map((e, index) => (
-          <Box flex={1} background={['black', 'white'][index % 2]} />
-        ))}
-      </Box> */}
       <Box flex={1}>
         <FlatList
           {...flatListProps}
           renderItem={({ item, index }) => {
-            return <Typography>{item.name}</Typography>;
+            return (
+              <Typography key={item.name} margin={[60, 5]} padding={[20, 20]}>
+                {item.name}
+              </Typography>
+            );
           }}
         />
       </Box>

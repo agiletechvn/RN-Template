@@ -17,20 +17,10 @@ interface BoxProps extends ViewProps {
   square: number;
   circle: number;
   shadowDepth: number;
-  margin: number;
-  marginTop: number;
-  marginBottom: number;
-  marginLeft: number;
-  marginRight: number;
-  marginHorizontal: number;
-  marginVertical: number;
-  padding: number;
-  paddingTop: number;
-  paddingBottom: number;
-  paddingLeft: number;
-  paddingRight: number;
-  paddingHorizontal: number;
-  paddingVertical: number;
+  width: string | number;
+  height: string | number;
+  margin: number | [number, number] | [number, number, number, number];
+  padding: number | [number, number] | [number, number, number, number];
 }
 
 export default function Box(props: BoxProps): {};

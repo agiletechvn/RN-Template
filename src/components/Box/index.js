@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
   SHADOW_HEIGHT_MAP,
   SHADOW_OPACITY_MAP,
   SHADOW_RADIUS_MAP,
 } from './constants';
+import { normalizeOptions } from '@src/utils/formatters';
 
 const Box = ({ style, children, ...rest }) => {
   const combinedStyle = [
@@ -18,23 +19,28 @@ const Box = ({ style, children, ...rest }) => {
     'circle',
     'shadowDepth',
     'margin',
-    'marginTop',
-    'marginBottom',
-    'marginLeft',
-    'marginRight',
-    'marginHorizontal',
-    'marginVertical',
     'padding',
-    'paddingTop',
-    'paddingBottom',
-    'paddingLeft',
-    'paddingRight',
-    'paddingHorizontal',
-    'paddingVertical',
   ]
     .map((e) => {
-      if (rest[e]) {
-        return styles[e](rest[e]);
+      const value = rest[e];
+      if (e === 'margin' || e === 'padding') {
+        const [top, bottom, left, right] = normalizeOptions(value);
+        if (e === 'margin') {
+          return StyleSheet.create({
+            marginTop: top,
+            marginBottom: bottom,
+            marginLeft: left,
+            marginRight: right,
+          });
+        }
+        return StyleSheet.create({
+          paddingTop: top,
+          paddingBottom: bottom,
+          paddingLeft: left,
+          paddingRight: right,
+        });
+      } else if (value) {
+        return styles[e](value);
       }
     })
     .filter((e) => e);
@@ -49,6 +55,12 @@ const Box = ({ style, children, ...rest }) => {
 const styles = StyleSheet.create({
   background: (color) => {
     return { backgroundColor: color };
+  },
+  width: (width) => {
+    return { width };
+  },
+  height: (height) => {
+    return { height };
   },
   flex: (number) => {
     return { flex: number };
@@ -106,49 +118,6 @@ const styles = StyleSheet.create({
       shadowRadius: SHADOW_RADIUS_MAP[realDepth],
       elevation: realDepth,
     };
-  },
-  margin: (number) => {
-    return { margin: number };
-  },
-  marginTop: (number) => {
-    return { marginTop: number };
-  },
-  marginBottom: (number) => {
-    return { marginBottom: number };
-  },
-  marginLeft: (number) => {
-    return { marginLeft: number };
-  },
-  marginRight: (number) => {
-    return { marginRight: number };
-  },
-  marginVertical: (number) => {
-    return { marginVertical: number };
-  },
-  marginHorizontal: (number) => {
-    return { marginHorizontal: number };
-  },
-
-  padding: (number) => {
-    return { padding: number };
-  },
-  paddingTop: (number) => {
-    return { paddingTop: number };
-  },
-  paddingBottom: (number) => {
-    return { paddingBottom: number };
-  },
-  paddingLeft: (number) => {
-    return { paddingLeft: number };
-  },
-  paddingRight: (number) => {
-    return { paddingRight: number };
-  },
-  paddingVertical: (number) => {
-    return { paddingVertical: number };
-  },
-  paddingHorizontal: (number) => {
-    return { paddingHorizontal: number };
   },
 });
 
