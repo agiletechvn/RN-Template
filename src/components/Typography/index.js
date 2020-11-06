@@ -2,34 +2,26 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { normalizeOptions } from '@src/utils/formatters';
 
-const Typography = ({ style, children, ...rest }) => {
-  const combinedStyle = ['color', 'fontSize', 'fontFamily', 'margin', 'padding']
+const Typography = ({ style, children, margin, padding, ...rest }) => {
+  const combinedStyle = ['color', 'fontSize', 'fontFamily']
     .map((e) => {
-      const value = rest[e];
-      if (e === 'margin' || e === 'padding') {
-        const [top, bottom, left, right] = normalizeOptions(value);
-        if (e === 'margin') {
-          return StyleSheet.create({
-            marginTop: top,
-            marginBottom: bottom,
-            marginLeft: left,
-            marginRight: right,
-          });
-        }
-        return StyleSheet.create({
-          paddingTop: top,
-          paddingBottom: bottom,
-          paddingLeft: left,
-          paddingRight: right,
-        });
-      } else if (value) {
-        return styles[e](value);
+      if (!rest[e]) {
+        return;
       }
+      return styles[e](rest[e]);
     })
     .filter((e) => e);
 
   return (
-    <Text style={[combinedStyle, style]} {...rest}>
+    <Text
+      style={[
+        combinedStyle,
+        margin && styles.margin(normalizeOptions(margin)),
+        padding && styles.padding(normalizeOptions(padding)),
+        style,
+      ]}
+      {...rest}
+    >
       {children}
     </Text>
   );
@@ -46,5 +38,21 @@ const styles = StyleSheet.create({
   },
   fontFamily: (fontFamily) => {
     return { fontFamily };
+  },
+  margin: ([top, left, bottom, right]) => {
+    return {
+      marginTop: top,
+      marginBottom: bottom,
+      marginLeft: left,
+      marginRight: right,
+    };
+  },
+  padding: ([top, left, bottom, right]) => {
+    return {
+      paddingTop: top,
+      paddingBottom: bottom,
+      paddingLeft: left,
+      paddingRight: right,
+    };
   },
 });

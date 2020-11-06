@@ -13,7 +13,6 @@ interface BoxProps extends ViewProps {
   align: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline';
   alignSelf: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline';
   flex: number;
-  background: string;
   square: number;
   circle: number;
   shadowDepth: number;

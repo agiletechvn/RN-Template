@@ -7,7 +7,7 @@ import {
 } from './constants';
 import { normalizeOptions } from '@src/utils/formatters';
 
-const Box = ({ style, children, ...rest }) => {
+const Box = ({ style, children, margin, padding, ...rest }) => {
   const combinedStyle = [
     'flexDirection',
     'justify',
@@ -18,35 +18,26 @@ const Box = ({ style, children, ...rest }) => {
     'square',
     'circle',
     'shadowDepth',
-    'margin',
-    'padding',
   ]
     .map((e) => {
-      const value = rest[e];
-      if (e === 'margin' || e === 'padding') {
-        const [top, bottom, left, right] = normalizeOptions(value);
-        if (e === 'margin') {
-          return StyleSheet.create({
-            marginTop: top,
-            marginBottom: bottom,
-            marginLeft: left,
-            marginRight: right,
-          });
-        }
-        return StyleSheet.create({
-          paddingTop: top,
-          paddingBottom: bottom,
-          paddingLeft: left,
-          paddingRight: right,
-        });
-      } else if (value) {
-        return styles[e](value);
+      if (!rest[e]) {
+        return;
       }
+
+      return styles[e](rest[e]);
     })
     .filter((e) => e);
 
   return (
-    <View style={[combinedStyle, style]} {...rest}>
+    <View
+      style={[
+        combinedStyle,
+        margin && styles.margin(normalizeOptions(margin)),
+        padding && styles.padding(normalizeOptions(padding)),
+        style,
+      ]}
+      {...rest}
+    >
       {children}
     </View>
   );
@@ -117,6 +108,22 @@ const styles = StyleSheet.create({
       shadowOpacity: SHADOW_OPACITY_MAP[realDepth],
       shadowRadius: SHADOW_RADIUS_MAP[realDepth],
       elevation: realDepth,
+    };
+  },
+  margin: ([top, left, bottom, right]) => {
+    return {
+      marginTop: top,
+      marginBottom: bottom,
+      marginLeft: left,
+      marginRight: right,
+    };
+  },
+  padding: ([top, left, bottom, right]) => {
+    return {
+      paddingTop: top,
+      paddingBottom: bottom,
+      paddingLeft: left,
+      paddingRight: right,
     };
   },
 });

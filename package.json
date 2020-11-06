@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "generate:ImageIcon": "node ./src/components/ImageIcon/scripts.js",
     "test": "jest",
     "lint": "eslint ."
   },

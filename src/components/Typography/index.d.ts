@@ -1,10 +1,6 @@
 import { TextProps } from 'react-native';
 
-type FontFamily =
-  | 'Roboto-Medium'
-  | 'Roboto-Regular'
-  | 'Roboto-Bold'
-  | 'Roboto-Light';
+type FontFamily = 'Sneak-Regular' | 'Sneak-Bold' | 'Sneak-Light';
 
 interface TypographyProps extends TextProps {
   color: string;
