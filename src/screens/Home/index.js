@@ -4,7 +4,12 @@ import Typography from '@src/components/Typography';
 import TouchableBox from '@src/components/TouchableBox';
 import { ScrollView } from 'react-native';
 
-const ROUTES = ['Typography', 'FlexBoxDemo'];
+const ROUTES = [
+  'Typography',
+  'FlexBoxDemo',
+  'AnimatedButtonWithSvgIconSample',
+  'AnimatedScrollWheelSample',
+];
 
 const Home = ({ navigation }) => {
   const onItemPress = useCallback(
@@ -19,6 +24,7 @@ const Home = ({ navigation }) => {
       <ScrollView>
         {ROUTES.map((route) => (
           <TouchableBox
+            key={route}
             shadowDepth={2}
             background="white"
             padding={[4, 8]}

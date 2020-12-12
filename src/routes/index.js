@@ -6,6 +6,7 @@ import Home from '@src/screens/Home';
 import AnimatedScrollWheelSample from '@src/screens/AnimatedScrollWheelSample';
 import TypographyDemo from '@src/screens/TypographyDemo';
 import FlexBoxDemo from '@src/screens/FlexBoxDemo';
+import AnimatedButtonWithSvgIconSample from '@src/screens/AnimatedButtonWithSvgIconSample';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,10 @@ const Routes = () => {
         <Stack.Screen
           name="AnimatedScrollWheelSample"
           component={AnimatedScrollWheelSample}
+        />
+        <Stack.Screen
+          name="AnimatedButtonWithSvgIconSample"
+          component={AnimatedButtonWithSvgIconSample}
         />
       </Stack.Navigator>
     </NavigationContainer>
