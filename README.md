@@ -13,3 +13,5 @@ Template structure for new React native project
 
 - npx react-native link
 - remove others duplicated or unused fonts in Copy bundle resources
+
+![Demo](./gifs/Screen_Demo.gif)
