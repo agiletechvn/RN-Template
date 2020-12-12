@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
+import colors from '@src/utils/colors';
 
-const Input = ({ style, ...rest }) => {
+const Input = React.forwardRef(({ style, disabled, ...rest }, ref) => {
   const combinedStyle = ['color', 'fontSize', 'fontFamily']
     .map((e) => {
       if (rest[e]) {
@@ -12,15 +13,18 @@ const Input = ({ style, ...rest }) => {
 
   return (
     <TextInput
+      ref={ref}
       autoCapitalize={'none'}
-      autoCompleteType={'email'}
+      autoCorrect={false}
       maxLength={255}
       underlineColorAndroid="rgba(0,0,0,0)"
+      selectionColor={colors.black100}
+      editable={!disabled}
       {...rest}
       style={[styles.defaultStyle, combinedStyle, style]}
     />
   );
-};
+});
 
 const styles = StyleSheet.create({
   defaultStyle: {

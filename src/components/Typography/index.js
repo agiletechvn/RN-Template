@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { normalizeOptions } from '@src/utils/formatters';
+import colors from '@src/utils/colors';
 
-const Typography = ({ style, children, margin, padding, ...rest }) => {
-  const combinedStyle = ['color', 'fontSize', 'fontFamily']
+const Typography = ({ style, children, margin, padding, type, ...rest }) => {
+  const combinedStyle = ['color', 'fontSize', 'fontFamily', 'fontWeight']
     .map((e) => {
       if (!rest[e]) {
         return;
@@ -15,9 +16,10 @@ const Typography = ({ style, children, margin, padding, ...rest }) => {
   return (
     <Text
       style={[
-        combinedStyle,
         margin && styles.margin(normalizeOptions(margin)),
         padding && styles.padding(normalizeOptions(padding)),
+        type && styles.type(type),
+        combinedStyle,
         style,
       ]}
       {...rest}
@@ -30,6 +32,71 @@ const Typography = ({ style, children, margin, padding, ...rest }) => {
 export default Typography;
 
 const styles = StyleSheet.create({
+  type: (type) => {
+    if (type === 'h1') {
+      return {
+        color: colors.black100,
+        fontFamily: 'Sneak-Regular',
+        fontWeight: '300',
+        fontSize: 44,
+        lineHeight: 44,
+        letterSpacing: -2,
+        fontStyle: 'normal',
+      };
+    }
+    if (type === 'h2') {
+      return {
+        color: colors.black100,
+        fontFamily: 'Sneak-Regular',
+        fontWeight: '400',
+        fontSize: 18,
+        lineHeight: 24,
+        letterSpacing: -0.5,
+        fontStyle: 'normal',
+      };
+    }
+    if (type === 'h3') {
+      return {
+        color: colors.black100,
+        fontFamily: 'Sneak-Regular',
+        fontWeight: '400',
+        fontSize: 16,
+        lineHeight: 19.2,
+        fontStyle: 'normal',
+      };
+    }
+    if (type === 'h4') {
+      return {
+        color: colors.black100,
+        fontFamily: 'Sneak-Regular',
+        fontWeight: '700',
+        fontSize: 11,
+        lineHeight: 16,
+        fontStyle: 'normal',
+      };
+    }
+    if (type === 'paragraph') {
+      return {
+        color: colors.black100,
+        fontFamily: 'Sneak-Regular',
+        fontWeight: '400',
+        fontSize: 13,
+        lineHeight: 16,
+        fontStyle: 'normal',
+      };
+    }
+    if (type === 'note') {
+      return {
+        fontFamily: 'Sneak-Regular',
+        fontWeight: '400',
+        fontSize: 11,
+        lineHeight: 16,
+        fontStyle: 'normal',
+      };
+    }
+
+    return;
+  },
   color: (color) => {
     return { color };
   },
@@ -38,6 +105,15 @@ const styles = StyleSheet.create({
   },
   fontFamily: (fontFamily) => {
     return { fontFamily };
+  },
+  fontWeight: (fontWeight) => {
+    return { fontWeight: `${fontWeight}` };
+  },
+  lineHeight: (lineHeight) => {
+    return { lineHeight };
+  },
+  letterSpacing: (letterSpacing) => {
+    return { letterSpacing };
   },
   margin: ([top, left, bottom, right]) => {
     return {

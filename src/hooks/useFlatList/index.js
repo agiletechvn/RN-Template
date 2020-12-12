@@ -7,12 +7,12 @@ const useFlatlist = (service, options) => {
     loadMore: true,
     debounceInterval: 250,
     isNoMore: (e) => {
-      return e?.list?.length >= e?.total;
+      return e?.list && e?.total && e?.list?.length < e?.total;
     },
     ...options,
   });
 
-  const onEndReachedCalledDuringMomentum = useRef(true);
+  const onEndReachedCalledDuringMomentum = useRef(false);
 
   const onMomentumScrollBegin = useCallback(() => {
     onEndReachedCalledDuringMomentum.current = false;
@@ -29,6 +29,7 @@ const useFlatlist = (service, options) => {
 
   const flatListProps = {
     onMomentumScrollBegin,
+    scrollEventThrottle: 16,
     keyExtractor,
     onEndReached,
     refreshing: request?.loading,

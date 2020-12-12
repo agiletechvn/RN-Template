@@ -1,10 +1,6 @@
 import { TextInputProps } from 'react-native';
 
-type FontFamily =
-  | 'Roboto-Medium'
-  | 'Roboto-Regular'
-  | 'Roboto-Bold'
-  | 'Roboto-Light';
+type FontFamily = 'Sneak-Regular' | 'Sneak-Bold' | 'Sneak-Light';
 
 interface InputProps extends TextInputProps {
   color: string;
