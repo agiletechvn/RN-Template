@@ -10,6 +10,7 @@ const ROUTES = [
   'AnimatedButtonWithSvgIconSample',
   'AnimatedScrollWheelSample',
   'ListDemo',
+  'DetailDemo',
 ];
 
 const Home = ({ navigation }) => {

@@ -8,6 +8,7 @@ import TypographyDemo from '@src/screens/TypographyDemo';
 import FlexBoxDemo from '@src/screens/FlexBoxDemo';
 import AnimatedButtonWithSvgIconSample from '@src/screens/AnimatedButtonWithSvgIconSample';
 import ListDemo from '@src/screens/ListDemo';
+import DetailDemo from '@src/screens/DetailDemo';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ const Routes = () => {
           component={AnimatedButtonWithSvgIconSample}
         />
         <Stack.Screen name="ListDemo" component={ListDemo} />
+        <Stack.Screen name="DetailDemo" component={DetailDemo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

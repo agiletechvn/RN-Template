@@ -67,4 +67,5 @@ const API_VERSION = '/api';
 export const PATHS = {
   // user
   USER_LIST: `${API_VERSION}/users`,
+  USER_DETAIL: ({ id }) => `${API_VERSION}/users/${id}`,
 };

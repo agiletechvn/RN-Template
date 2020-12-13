@@ -10,7 +10,12 @@ import useInput from '@src/hooks/useInput';
 
 const User = ({ item }) => {
   return (
-    <Box padding={[0, 16]} margin={[16, 0, 0, 0]} flexDirection="row">
+    <Box
+      padding={[0, 16]}
+      margin={[16, 0, 0, 0]}
+      flexDirection="row"
+      align="center"
+    >
       <Image
         source={{ uri: item.avatar }}
         style={styles.image}
@@ -68,6 +73,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     borderRadius: 20,
+    backgroundColor: colors.black20,
   },
   inputContainer: {
     flex: 1,
