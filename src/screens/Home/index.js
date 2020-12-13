@@ -9,6 +9,7 @@ const ROUTES = [
   'FlexBoxDemo',
   'AnimatedButtonWithSvgIconSample',
   'AnimatedScrollWheelSample',
+  'ListDemo',
 ];
 
 const Home = ({ navigation }) => {

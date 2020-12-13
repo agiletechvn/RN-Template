@@ -1,69 +1,70 @@
 import { extend } from 'umi-request';
-import TokenManagement from '@src/utils/TokenManagement';
-import ElsewhereStore from '@src/store';
+// import TokenManagement from '@src/utils/TokenManagement';
+// import ElsewhereStore from '@src/store';
 
 export const BE = extend({
-  prefix: 'http://localhost:3000',
+  prefix: 'https://reqres.in',
 });
 
-BE.interceptors.response.use(
-  async (response) => {
-    const data = await response.clone().json();
-    if (!response.ok) {
-      // eslint-disable-next-line no-console
-      console.error(data);
+// BE.interceptors.response.use(
+//   async (response) => {
+//     const data = await response.clone().json();
+//     if (!response.ok) {
+//       // eslint-disable-next-line no-console
+//       console.error(data);
 
-      return response;
-    }
+//       return response;
+//     }
 
-    return response;
-  },
-  { global: false },
-);
+//     return response;
+//   },
+//   { global: false },
+// );
 
-export const injectBearer = (token, configs) => {
-  if (!configs) {
-    return {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-  }
+// export const injectBearer = (token, configs) => {
+//   if (!configs) {
+//     return {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     };
+//   }
 
-  if (configs.headers) {
-    return {
-      ...configs,
-      headers: {
-        ...configs.headers,
-        Authorization: `Bearer ${token}`,
-      },
-    };
-  }
+//   if (configs.headers) {
+//     return {
+//       ...configs,
+//       headers: {
+//         ...configs.headers,
+//         Authorization: `Bearer ${token}`,
+//       },
+//     };
+//   }
 
-  return {
-    ...configs,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-};
+//   return {
+//     ...configs,
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   };
+// };
 
-const TokenManager = new TokenManagement({
-  isTokenValid: () => {
-    return true;
-  },
-  getAccessToken: () => {
-    return ElsewhereStore?.store?.getState()?.user?.token;
-  },
-});
+// const TokenManager = new TokenManagement({
+//   isTokenValid: () => {
+//     return true;
+//   },
+//   getAccessToken: () => {
+//     return ElsewhereStore?.store?.getState()?.user?.token;
+//   },
+// });
 
-export const privateRequest = async (request, url, configs) => {
-  const token = await TokenManager.getToken();
-  return request(url, injectBearer(token, configs));
-};
+// export const privateRequest = async (request, url, configs) => {
+//   const token = await TokenManager.getToken();
+//   return request(url, injectBearer(token, configs));
+// };
 
-const API_VERSION = '/v1.0';
+const API_VERSION = '/api';
 
 export const PATHS = {
-  SERVICE_NAME: `${API_VERSION}/service_path`,
+  // user
+  USER_LIST: `${API_VERSION}/users`,
 };
