@@ -19,4 +19,4 @@ Template structure for new React native project
 - remove others duplicated or unused fonts in Copy bundle resources
 
 ![Demo](./gifs/Screen_Demo.gif)
-![ListSearchAndDetail](./gifs/Screen_Demo.gif)
+![ListSearchAndDetail](./gifs/List_Search_And_Detail_Request_Demo.gif)
