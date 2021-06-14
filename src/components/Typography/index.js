@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   letterSpacing: (letterSpacing) => {
     return { letterSpacing };
   },
-  margin: ([top, left, bottom, right]) => {
+  margin: ([top, right, bottom, left]) => {
     return {
       marginTop: top,
       marginBottom: bottom,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
       marginRight: right,
     };
   },
-  padding: ([top, left, bottom, right]) => {
+  padding: ([top, right, bottom, left]) => {
     return {
       paddingTop: top,
       paddingBottom: bottom,
