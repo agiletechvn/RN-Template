@@ -1,13 +1,13 @@
+import { normalizeOptions } from '@src/utils/formatters';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {
   SHADOW_HEIGHT_MAP,
   SHADOW_OPACITY_MAP,
   SHADOW_RADIUS_MAP,
 } from './constants';
-import { normalizeOptions } from '@src/utils/formatters';
 
-const Box = ({ style, children, margin, padding, ...rest }) => {
+const Box = ({style, children, margin, padding, pressable, ...rest}) => {
   const combinedStyle = [
     'flexDirection',
     'justify',
@@ -18,15 +18,33 @@ const Box = ({ style, children, margin, padding, ...rest }) => {
     'square',
     'circle',
     'shadowDepth',
+    'height',
+    'width',
   ]
-    .map((e) => {
+    .map(e => {
       if (!rest[e]) {
         return;
       }
 
       return styles[e](rest[e]);
     })
-    .filter((e) => e);
+    .filter(e => e);
+
+  if (pressable) {
+    return (
+      <TouchableOpacity
+        style={[
+          combinedStyle,
+          margin && styles.margin(normalizeOptions(margin)),
+          padding && styles.padding(normalizeOptions(padding)),
+          style,
+        ]}
+        activeOpacity={0.7}
+        {...rest}>
+        {children}
+      </TouchableOpacity>
+    );
+  }
 
   return (
     <View
@@ -36,60 +54,59 @@ const Box = ({ style, children, margin, padding, ...rest }) => {
         padding && styles.padding(normalizeOptions(padding)),
         style,
       ]}
-      {...rest}
-    >
+      {...rest}>
       {children}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  background: (color) => {
-    return { backgroundColor: color };
+  background: color => {
+    return {backgroundColor: color};
   },
-  width: (width) => {
-    return { width };
+  width: width => {
+    return {width};
   },
-  height: (height) => {
-    return { height };
+  height: height => {
+    return {height};
   },
-  flex: (number) => {
-    return { flex: number };
+  flex: number => {
+    return {flex: number};
   },
-  flexDirection: (direction) => {
+  flexDirection: direction => {
     return {
       flexDirection: direction,
     };
   },
-  justify: (alignment) => {
+  justify: alignment => {
     return {
       justifyContent: alignment,
     };
   },
-  align: (alignment) => {
+  align: alignment => {
     return {
       alignItems: alignment,
     };
   },
-  alignSelf: (alignment) => {
+  alignSelf: alignment => {
     return {
       alignSelf: alignment,
     };
   },
-  square: (number) => {
+  square: number => {
     return {
       height: number,
       width: number,
     };
   },
-  circle: (number) => {
+  circle: number => {
     return {
       height: number,
       width: number,
       borderRadius: number / 2,
     };
   },
-  shadowDepth: (depth) => {
+  shadowDepth: depth => {
     let realDepth = 0;
     if (depth > 24) {
       realDepth = 24;
