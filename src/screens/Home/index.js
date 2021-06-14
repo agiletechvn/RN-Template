@@ -10,6 +10,7 @@ const ROUTES = [
   'AnimatedScrollWheelSample',
   'ListDemo',
   'DetailDemo',
+  'SkeletonDemo'
 ];
 
 const Home = ({ navigation }) => {
