@@ -20,6 +20,7 @@ interface BoxProps extends ViewProps {
   height: string | number;
   margin: number | [number, number] | [number, number, number, number];
   padding: number | [number, number] | [number, number, number, number];
+  pressable?: boolean;
 }
 
 export default function Box(props: BoxProps): {};
