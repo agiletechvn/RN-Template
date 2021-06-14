@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import Box from '@src/components/Box';
 import Typography from '@src/components/Typography';
-import TouchableBox from '@src/components/TouchableBox';
 import { ScrollView } from 'react-native';
 
 const ROUTES = [
@@ -25,7 +24,8 @@ const Home = ({ navigation }) => {
     <Box flex={1} padding={[4]} shadowDepth={2}>
       <ScrollView>
         {ROUTES.map((route) => (
-          <TouchableBox
+          <Box
+            pressable
             key={route}
             shadowDepth={2}
             background="white"
@@ -34,7 +34,7 @@ const Home = ({ navigation }) => {
             onPress={() => onItemPress(route)}
           >
             <Typography type="h2">{route}</Typography>
-          </TouchableBox>
+          </Box>
         ))}
       </ScrollView>
     </Box>
