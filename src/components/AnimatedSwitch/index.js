@@ -1,4 +1,4 @@
-import STYLES from '@src/styles';
+import STYLES from '@src/components/Form/DatePicker/node_modules/@src/styles';
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
 import { StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native';
 
